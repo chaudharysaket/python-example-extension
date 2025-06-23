@@ -68,6 +68,23 @@ def process_events(ext_id):
         else:
             execute_custom_processing(event)
 
+def make_get_request():
+    endpoint = os.getenv("ENDPOINT", "https://google.com")
+
+    print(f"Attempting GET request to: {endpoint}")
+
+    try:
+        response = requests.get(endpoint)
+
+        if response.status_code == 200:
+            print(f"Success! Status code: {response.status_code}")
+        else:
+            print(f"Error: Received status code {response.status_code} for {endpoint}")
+
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred during the request to {endpoint}: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
 
 def main():
     # handle signals
@@ -75,7 +92,11 @@ def main():
     signal.signal(signal.SIGTERM, handle_signal)
 
     # execute extensions logic
+    print("Making get request before registering extension...")
+    make_get_request()
     extension_id = register_extension()
+    print("Making get request after registering extension...")
+    make_get_request()
     process_events(extension_id)
 
 

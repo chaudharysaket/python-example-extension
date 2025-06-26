@@ -1,4 +1,5 @@
 # Example Extension in Python
+`ENDPOINT` environment variable can be used to provide a public endpoint to test if the Extension can access it.
 The provided code sample demonstrates how to get a basic extension written in Python 3 up and running.
 
 > Note: This extension requires the Python 3 runtime to be present in the Lambda execution environment of your function.
